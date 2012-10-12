@@ -3,6 +3,23 @@
 
 window.jeeves = {};
 
+// Returns an object of key/value pairs for the parameters in a url
+jeeves.getURLParameters = function() {
+
+var urlParams = {},
+  e,
+  a = /\+/g,  // Regex for replacing addition symbol with a space
+  r = /([^&=]+)=?([^&]*)/g,
+  d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+  q = window.location.search.substring(1);
+
+  while (e = r.exec(q)) {
+    urlParams[d(e[1])] = d(e[2]);
+  }
+
+  return urlParams;
+};
+
 // Adds a JS or CSS file to the page
 // @STRING url
 jeeves.addFileAsset = function(url) {
